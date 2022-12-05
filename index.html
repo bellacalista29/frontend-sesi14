@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        #tableBuah {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #tableBuah td,
+        #tableBuah th {
+            border: 1px solid lightcoral;
+            padding: 8px;
+        }
+
+        #tableBuah tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tableBuah tr:hover {
+            background-color: lightcoral;
+        }
+
+        #tableBuah th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: indianred;
+            color: white;
+        }
+
+        .btn-custom {
+            background-color: bisque;
+        }
+
+        .btn-custom2 {
+            background-color: burlywood;
+        }
+
+        .btn-custom3 {
+            background-color: lightsalmon;
+        }
+
+        .div-add {
+            margin-right: 20px;
+            margin-bottom: 50px;
+        }
+
+        #inputBuah {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="float-end mt-3 div-add ">
+        <label for="inputBuah">Masukkan Nama Buah</label><br>
+        <div class="d-flex">
+            <input type="text" id="inputBuah" name="inputBuah">
+            <button class="btn btn-custom3 btn-sm" id="tambahBuah" onclick="tambahBuah()">Tambah</button>
+        </div>
+    </div>
+    <table class="table" id="tableBuah">
+        <thead>
+            <tr>
+                <th scope="col">Nama Buah</th>
+                <th scope="col">Action Ubah</th>
+                <th scope="col">Action Hapus</th>
+            </tr>
+        </thead>
+        <tbody id="tableContent">
+        </tbody>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+        var listBuah = ["mangga", "melon", "semangka"];
+        console.log(listBuah);
+
+        function tampilkanList(list) {
+            list.forEach(function (value, i) {
+                $("#tableContent").append(`<tr>
+                <td>${value}</td>
+                <td><button class="btn btn-custom2 btn-sm" id="ubah-${i}" onclick="ubahBuah(${i})">Ubah</button></td>
+                <td><button class="btn btn-custom btn-sm" id="hapus-${i}" onclick="hapusBuah(${i})">Hapus</button></td>
+            </tr>`)
+            });
+        }
+
+        tampilkanList(listBuah);
+
+        function ubahBuah(idx) {
+            var namaBaru = prompt("Masukkan nama buah yang baru");
+            listBuah[idx] = namaBaru;
+            $("#tableContent").empty();
+            tampilkanList(listBuah);
+        }
+
+        function hapusBuah(idx) {
+            listBuah.splice(idx, 1);
+            $("#tableContent").empty();
+            tampilkanList(listBuah);
+        }
+
+        function tambahBuah() {
+            var buahBaru = document.getElementById("inputBuah").value;
+            listBuah.push(buahBaru);
+            $("#tableContent").empty();
+            tampilkanList(listBuah);
+            console.log(listBuah);
+        }
+
+
+    </script>
+</body>
+
+</html>
